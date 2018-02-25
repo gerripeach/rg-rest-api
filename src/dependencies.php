@@ -10,7 +10,7 @@ $container = $app->getContainer();
 // database connection
 $container['database'] = function ($c) {
     $settings = $c->get('settings')['database'];
-    return new Slim\Database\Database($settings['host'], $settings['port'], $settings['user'], $settings['pass'], $settings['base'], $settings['db_name']);
+    return new Slim\Database\Database($c->logger, $settings['host'], $settings['port'], $settings['user'], $settings['pass'], $settings['base'], $settings['table_name']);
 };
 
 // monolog

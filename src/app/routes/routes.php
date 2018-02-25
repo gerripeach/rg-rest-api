@@ -15,17 +15,18 @@ $app->get('/get/{code}', function (Request $request, Response $response, array $
     $database = $this->get('database');
     $result = $database->getCode($code);
 	
-	$this->logger->info("API /invalidate/$code");
+	$this->logger->debug("API /invalidate/$code");
 
     return $response->withJson($result);
 });
 
-$app->post('/invalidate/{code}', function (Request $request, Response $response, array $args) {
+$app->post('/invalidate/{code}/{guid}', function (Request $request, Response $response, array $args) {
     $code = $args['code'];
+    $guid = $args['guid'];
     $database = $this->get('database');
-    $result = $database->invalidateCode($code);
+    $result = $database->invalidateCode($code, $guid);
 	
-	$this->logger->info("API /invalidate/$code");
+	$this->logger->debug("API /invalidate/$code");
 
     return $response->withJson($result);
 });

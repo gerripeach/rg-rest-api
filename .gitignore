@@ -1,6 +1,6 @@
 /.idea
 /vendor/
-/logs/*
-!/logs/README.md
+/src/logs/*
+!/src/logs/README.md
 
-/src/settings.php
+/src/config.php

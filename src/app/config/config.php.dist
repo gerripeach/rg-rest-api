@@ -24,7 +24,7 @@ return [
             'user' => 'your_db_user_name',
             'pass' => 'your_secret_password',
             'base' => 'joomla',
-            'db_name' => 'jos_rgpremium_codes',
+            'table_name' => 'jos_rgpremium_codes',
         ],
 
         // authentication settings
