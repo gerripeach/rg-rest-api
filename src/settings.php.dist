@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright (c) 2018 gerripeach <phillip.dev.p@gmail.com>
+ * Distributed under the MIT License
+ * (See accompanying file LICENSE or a copy at https://opensource.org/licenses/MIT)
+ */
+
+return [
+    'settings' => [
+        'displayErrorDetails' => true, // set to false in production
+        'addContentLengthHeader' => false, // Allow the web server to send the content-length header
+
+        // Monolog settings
+        'logger' => [
+            'name' => 'slim-app',
+            'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
+            'level' => \Monolog\Logger::DEBUG,
+        ],
+
+        // Database settings
+        'database' => [
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'user' => 'your_db_user_name',
+            'pass' => 'your_secret_password',
+            'base' => 'joomla',
+            'db_name' => 'jos_rgpremium_codes',
+        ],
+
+        // authentication settings
+        'auth' => [
+            'token' => 'f2822f1611cb394f610223511b65fdcfad884ed9',
+        ],
+    ],
+];
