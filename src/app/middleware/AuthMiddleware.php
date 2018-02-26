@@ -34,7 +34,7 @@ class AuthMiddleware
     public function denyAccess(Response $response) {
         return $response->
             withStatus(401, 'Unauthorized')->
-            withHeader(
+            withAddedHeader(
                 'WWW-Authenticate',
                 'Bearer');
     }

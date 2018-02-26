@@ -56,7 +56,7 @@ class Database {
         );
     }
 
-    public function invalidateCode(string $code, int $redeemerGUID) {
+    public function proccessCode(string $code, int $redeemerGUID) {
         $query = "UPDATE `$this->tableName_` SET `used`=1, `redeemerGuid`=:guid, `redeemTime`=NOW() WHERE `code`=:code AND `used`=0";
         $statement = $this->pdo_->prepare($query);
         $statement->bindParam(':guid', $redeemerGUID, PDO::PARAM_INT);
@@ -65,10 +65,20 @@ class Database {
 
         $successful = $statement->rowCount();
         if ($successful)
-            $this->logger_->info("Successful invalidated code: $code redeemer guid: $redeemerGUID");
+            $this->logger_->info("Successful proccessed code: $code redeemer guid: $redeemerGUID");
 
         return array(
             "successful" => $statement->rowCount()
         );
+    }
+
+    public function invalidateCode(string $code, int $redeemerGUID) {
+        $query = "UPDATE `$this->tableName_` SET `used`=2, `redeemerGuid`=:guid, `redeemTime`=NOW() WHERE `code`=:code AND `used`!=2";
+        $statement = $this->pdo_->prepare($query);
+        $statement->bindParam(':guid', $redeemerGUID, PDO::PARAM_INT);
+        $statement->bindParam(':code', $code, PDO::PARAM_STR);
+        $statement->execute();
+
+        return intval($statement->rowCount());
     }
 }
